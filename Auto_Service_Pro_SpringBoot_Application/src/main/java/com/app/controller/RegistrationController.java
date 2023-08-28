@@ -16,7 +16,7 @@ public class RegistrationController {
 	@Autowired
 	private UserService serv;
 	
-	@PostMapping("/addUser")
+	@PostMapping
 	public ResponseEntity<?> saveNewUser(@RequestBody RegistrationDTO transientUser){
 		return new ResponseEntity<>(serv.addUser(transientUser),HttpStatus.CREATED);
 	}

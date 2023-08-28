@@ -33,13 +33,13 @@ public class PaymentController {
 			return serv.getAllPayment();
 		}
 		
-		@GetMapping("/id/{id}")
+		@GetMapping("/{id}")
 		public Payment getPaymentById(@PathVariable Integer id) {
 			return serv.getPaymentById(id); 
 		}
 
 		
-		@DeleteMapping("{id}")
+		@DeleteMapping("/{id}")
 		public String deletePayment(@PathVariable Integer id){
 			return serv.deletePayment(id);
 		}

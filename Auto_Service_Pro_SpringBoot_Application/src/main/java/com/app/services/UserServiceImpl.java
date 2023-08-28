@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dto.AuthRequestDTO;
 import com.app.dto.AuthResponseDTO;
+import com.app.dto.AuthoResponseToken;
 import com.app.dto.RegistrationDTO;
 import com.app.entities.User;
 import com.app.exceptions.ResourceNotFoundException;
@@ -81,7 +82,7 @@ public class UserServiceImpl implements UserService {
 
 	// for login
 	@Override
-	public AuthResponseDTO authenticateUser(AuthRequestDTO request, HttpSession session, HttpServletResponse response) {
+	public AuthoResponseToken authenticateUser(AuthRequestDTO request, HttpSession session, HttpServletResponse response) {
 
 
 
@@ -93,7 +94,7 @@ public class UserServiceImpl implements UserService {
 		session.setAttribute("user", user);
 		 SaveCookie.sendToken(jwt, response);
 		AuthResponseDTO authRespDTO = mapper.map(user, AuthResponseDTO.class);
-		return authRespDTO;
+		return new AuthoResponseToken(jwt);
 	}
 
 	@Override

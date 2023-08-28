@@ -37,11 +37,12 @@ export default function LoginPage() {
         });
   
         if (response.status === 200) {
-          setData({user : response.data});
+          setData(response.data);
           // alert(response.data.email+" "+response.data.role);
+          
           setEmail("");
           setPassword("");
-          nav("/User", { state: { user: response.data } });
+          nav("/User", { state: { user: data } });
         } else {
           setErrorMessage("Invalid credentials. Please try again.");
         }

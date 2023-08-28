@@ -1,11 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { MDBContainer } from 'mdb-react-ui-kit';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import qualitySvg from '../img/quality-svgrepo-com.svg';
 import expSvg from '../img/mechanic-svgrepo-com.svg';
 import toolSvg from '../img/tools-svgrepo-com.svg';
 import Slides from './Slides';
 import SevriceSlides from './ServicesSlides';
+import axios from 'axios';
 
 const HomePage = () => {
 
@@ -23,6 +24,33 @@ const HomePage = () => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
     };
+
+    const [feedback, setFeedback] = useState([]);
+    const [displayedFeedback, setDisplayedFeedback] = useState([]);
+    const [showMore, setShowMore] = useState(false);
+
+    async function getFeedback() {
+        await axios
+            .get(`http://localhost:8080/feedbacks`)
+            .then((res) => {
+                setFeedback(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    useEffect(() => {
+        getFeedback();
+    }, []);
+
+    useEffect(() => {
+        if (showMore) {
+            setDisplayedFeedback(feedback);
+        } else {
+            setDisplayedFeedback(feedback.slice(0, 5));
+        }
+    }, [showMore, feedback]);
 
     return (
         <>
@@ -84,8 +112,43 @@ const HomePage = () => {
                 <div id='service'>
                     <SevriceSlides />
                 </div>
+           
+            <div>
+                <hr />
+                <h1>Customer Feedbacks</h1>
+                <hr />
+            </div>
+            <div className="table-responsive">
+                <table className="table table-dark">
+                    <thead className="thead-light">
+                        <tr>
+                            <th scope="col">Sr.no</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {displayedFeedback.map((item, index) => (
+                            <tr key={index}>
+                                <th scope="row">{index + 1}</th>
+                                <td>{item.comment}</td>
+                                <td>{item.rating}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                {!showMore && (
+                    <div className="text-center">
+                        <button className="btn btn-secondary" onClick={() => setShowMore(true)}>
+                            Show More Feedback
+                        </button>
+                    </div>
+                )}
+            </div>
             </MDBContainer>
-            
+
+
+
         </>
     );
 }

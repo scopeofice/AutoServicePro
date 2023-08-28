@@ -30,16 +30,13 @@ export default function Singnup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const role="CUSTOMER";
   const nav = useNavigate();
 
 
   const handleSignup = async () => {  
-    alert(firstName+" "+lastName+" "+password)  
     if(confirmPassword===password){
       try {
-        alert("yes")
         const response = await axios.post("http://localhost:8080/register", {
           firstName,
           lastName,
@@ -51,19 +48,16 @@ export default function Singnup() {
         if (response.status === 201) {
           // alert("Registration successful! You can now log in.");
           nav("/Login");
-        } else {
-          // alert("not ok")
-          setErrorMessage("An error occurred during registration.");
-        }
+        } 
       } catch (error) {
         console.error("Registration error", error);
-        setErrorMessage("An error occurred during registration.");
       }
-    }else{
-        setErrorMessage("An error occurred during registration.");
+    
     }
+    else{
+      console.error("Password didn't match.")
     }
-
+  }
   
 
 
@@ -150,9 +144,6 @@ export default function Singnup() {
                         </Link>
                       </p>
                     </div>
-
-
-                    {errorMessage && <p>{errorMessage}</p>}
             </MDBCardBody>
           </MDBCard>
 

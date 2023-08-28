@@ -17,7 +17,6 @@ public class RegistrationDTO {
 	@NotBlank
     private String lastName;
 	@Email
-	@NotBlank
     private String email;
 	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})"
 			, message = "Invalid password!!!")
