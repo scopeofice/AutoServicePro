@@ -18,4 +18,6 @@ public interface UserService {
 	String updateUserDetails(AuthResponseDTO detachedUser);
 	User getUserByEmail(String email);
 	AuthResponseDTO authenticateUser(AuthRequestDTO request, HttpSession session, HttpServletResponse response);
+	void sendOTPToUserEmail(String email);
+	String resetPasswordWithOTP(String email, String otp, String newPassword);
 }

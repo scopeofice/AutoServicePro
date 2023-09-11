@@ -14,7 +14,7 @@ import com.app.services.UserService;
 
 @RestController
 @RequestMapping("/login")
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = "http://localhost:3000")
 public class LoginController {
 	
 	@Autowired

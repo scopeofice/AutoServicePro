@@ -20,7 +20,7 @@ import com.app.services.ServicesService;
 
 @RestController
 @RequestMapping("/service")
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ServiceController {
 	
 	public ServiceController() {

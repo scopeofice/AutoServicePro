@@ -10,7 +10,7 @@ import com.app.services.BookingServiceService;
 
 @RestController
 @RequestMapping("/bookingService")
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = "http://localhost:3000")
 public class BookingServiceController {
 
     private final BookingServiceService bookingServiceService;

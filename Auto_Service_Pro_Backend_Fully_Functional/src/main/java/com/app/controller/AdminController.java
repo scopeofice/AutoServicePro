@@ -25,7 +25,7 @@ import com.app.services.UserService;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
 	
 	//Service specific functionalities
