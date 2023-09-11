@@ -24,9 +24,9 @@ public class SpringSecurity {
         return http.csrf(csrf -> csrf.disable()).authorizeRequests(auth -> {
             auth.antMatchers("/swagger*/*", "/v/api-docs/**", "/user/all").permitAll();
             auth.antMatchers("/User/**").permitAll();
-					auth.antMatchers("/Customer/**").hasRole("CUSTOMER");
-					auth.antMatchers("/Admin").hasRole("ADMIN");
-					auth.antMatchers("/Employee").hasRole("EMPLOYEE");
+					auth.antMatchers("/customer/**").hasRole("CUSTOMER");
+					auth.antMatchers("/admin").hasRole("ADMIN");
+					auth.antMatchers("/employee").hasRole("EMPLOYEE");
         }).httpBasic(Customizer.withDefaults()).build();
     }
 
